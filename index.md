@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: Home Page
 ---
 # Test Article
 This is the content for the test article
