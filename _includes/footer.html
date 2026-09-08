@@ -1,8 +1,16 @@
 <footer class="site-footer">
-  <div class="wrapper">
-    {% capture footer_content %} ### About Me This is my custom footer. I can
-    use **bold text**, [links](https://github.com), and standard markdown layout
-    styling here. © 2026 @{{ sitegithub_username }}. All rights reserved. {%
-    endcapture %} {{ footer_content | markdownify }}
+  <div
+    class="wrapper"
+    style="display: flex; justify-content: space-between; align-items: center"
+  >
+    <!-- Left Side: Copyright -->
+    <div>
+      <p>© 2026 {{ site.github_username }}. All rights reserved.</p>
+    </div>
+
+    <!-- Right Side: Back to Top Link -->
+    <div>
+      <a href="#top" id="back-to-top">↑ Back to Top</a>
+    </div>
   </div>
 </footer>
