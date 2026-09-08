@@ -1,0 +1,5 @@
+title: NishadNYC Github Profile
+theme: jekyll-theme-minima
+plugins:
+  - jekyll-remote-theme
+remote_theme: jekyll/minima@v2.5.1
