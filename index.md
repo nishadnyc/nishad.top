@@ -3,7 +3,7 @@ layout: default
 title: Blog | NishadNYC@github
 ---
 
-{% include nav.html paths="index.md,about.md" %}
+{% include nav.html %}
 
 <div class="home">
   <h2 class="post-list-heading">Posts</h2>
