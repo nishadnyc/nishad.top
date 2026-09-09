@@ -208,17 +208,8 @@ pre.highlight {
     justify-content: center !important;
     width: 100% !important;
   }
-}
 
-// ========================================================
-//  TARGETING INLINE PLAINTEXT HIGHLIGHTER ROUGE SPECIFICITY
-// ========================================================
-
-// Strip individual line/word token outline boxes nesting inside it
-.language-plaintext .highlighter-rouge {
-  border: 0 !important;
-  border-width: 0 !important;
-  border-style: none !important;
-  box-shadow: none !important;
-  outline: none !important;
+  .site-title {
+    font-size: 1.8rem !important; // Slightly smaller for mobile
+  }
 }
