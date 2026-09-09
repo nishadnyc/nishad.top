@@ -1,10 +1,99 @@
+<div
+  class="terminal-shell"
+  style="
+    border: 1px solid #005500;
+    background-color: #020202;
+    padding: 20px;
+    font-family: &quot;Courier New&quot;, Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(0, 85, 0, 0.2);
+    margin: 30px 0;
+    min-height: 200px;
+    display: block !important;
+  "
+>
+  <!-- Embedded Jekyll data loops -->
+  <div id="jekyll-data-posts" style="display: none">
+    {% for post in site.posts %}
+    <div
+      data-title="{{ post.title | escape }}"
+      data-url="{{ post.url | relative_url }}"
+    ></div>
+    {% endfor %}
+  </div>
+
+  <div id="jekyll-data-pages" style="display: none">
+    {% for hyperpage in site.html_pages %} {% if hyperpage.title and
+    hyperpage.nav_exclude != true %}
+    <div
+      data-title="{{ hyperpage.title | escape }}"
+      data-url="{{ hyperpage.url | relative_url }}"
+    ></div>
+    {% endif %} {% endfor %}
+  </div>
+
+  <!-- Top Header Bar -->
+  <div
+    class="terminal-header"
+    style="
+      border-bottom: 1px solid #003300;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      color: #008800;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+    "
+  >
+    <span>SESSION: GUEST@NISHADNYC_OS v1.0.0</span>
+    <span>STATUS: ONLINE</span>
+  </div>
+
+  <!-- Content Log -->
+  <div id="terminalLog">
+    <div style="color: #00ff00">
+      Welcome to the interactive console. Type
+      <span style="color: #ffffff; font-weight: bold">help</span> for a list of
+      available core commands.
+    </div>
+  </div>
+
+  <!-- Prompt Input Line -->
+  <div
+    class="input-line"
+    style="display: flex; align-items: center; margin-top: 15px; color: #00ff00"
+  >
+    <span style="font-weight: bold; margin-right: 10px; white-space: nowrap"
+      >guest@nishadnyc:~$</span
+    >
+    <input
+      type="text"
+      id="terminalInput"
+      autocomplete="off"
+      spellcheck="false"
+      style="
+        background: transparent;
+        border: none;
+        color: #00ff00;
+        font-family: &quot;Courier New&quot;, monospace;
+        font-size: 14px;
+        width: 100%;
+        outline: none;
+        caret-color: #00ff00;
+      "
+    />
+  </div>
+</div>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById("terminalInput");
     const log = document.getElementById("terminalLog");
+    const shell = document.querySelector(".terminal-shell");
 
-    // SAFETY GUARD: Stops the code from throwing errors on non-terminal layout nodes
-    if (!input || !log) return;
+    if (!input || !log || !shell) return;
 
     const availablePosts = [];
     document.querySelectorAll("#jekyll-data-posts div").forEach(function (el) {
@@ -22,11 +111,9 @@
       });
     });
 
-    document
-      .querySelector(".terminal-shell")
-      .addEventListener("click", function () {
-        input.focus();
-      });
+    shell.addEventListener("click", function () {
+      input.focus();
+    });
 
     input.addEventListener("keydown", function (e) {
       if (e.key === "Enter") {
@@ -102,13 +189,13 @@
 
           case "sudo":
             output.innerHTML = `
-              <div style="color: #ff3333; font-weight: bold; animation: pulse 0.5s infinite alternate;">[!] WARNING: UNAUTHORIZED ROOT ACCESS ATTEMPT DETECTED</div>
-              <div style="color: #ffffff; margin-top: 5px;">
-                Bypassing security protocols...<br>
-                Cracking local keychains...<br>
-                <span style="color: #00ff00; font-weight: bold;">[SUCCESS] root@nishadnyc:~# ACCESS GRANTED. Welcome, admin.</span>
-              </div>
-            `;
+            <div style="color: #ff3333; font-weight: bold;">[!] WARNING: UNAUTHORIZED ROOT ACCESS ATTEMPT DETECTED</div>
+            <div style="color: #ffffff; margin-top: 5px;">
+              Bypassing security protocols...<br>
+              Cracking local keychains...<br>
+              <span style="color: #00ff00; font-weight: bold;">[SUCCESS] root@nishadnyc:~# ACCESS GRANTED. Welcome, admin.</span>
+            </div>
+          `;
 
             setTimeout(() => {
               const promptSpan = document.querySelector(".input-line span");
