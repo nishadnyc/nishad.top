@@ -61,3 +61,32 @@ pre {
   background-color: transparent !important;
   background: transparent !important;
 }
+
+// Terminal Window Accent Circles Override
+.highlighter-rouge,
+pre.highlight {
+  position: relative;
+}
+
+// Generate the window dots wrapper container
+.highlighter-rouge::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  width: 40px;
+  height: 12px;
+  z-index: 15;
+
+  // Use a linear-gradient map to paint three distinct colored terminal window nodes
+  background:
+    radial-gradient(circle, #ff5f56 4px, transparent 5px) no-repeat 0px 0px,
+    radial-gradient(circle, #ffbd2e 4px, transparent 5px) no-repeat 14px 0px,
+    radial-gradient(circle, #27c93f 4px, transparent 5px) no-repeat 28px 0px;
+  background-size: 10px 10px;
+}
+
+// Adjust our language badge slightly to the right so it doesn't overlap the circles
+.code-lang-badge {
+  left: 60px !important;
+}
