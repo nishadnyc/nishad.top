@@ -15,3 +15,5 @@ social_links:
   - title: Nishad's GitHub
     icon: github
     url: "https://github.com/NishadNYC"
+
+ hide_site_feed_link: false
