@@ -2,14 +2,14 @@
 ---
 
 // 1. Define custom Terminal Green and Pitch Black variables
-$brand-color: #00ff00 !default;
-$text-color: #00ff00 !default;
+$brand-color: #00ff00;
+$text-color: #00ff00;
 $background-color: #050505 !default;
 $code-background-color: #111111 !default;
 
-$link-color: #00ff00 !default;
-$link-visited-color: #00cc00 !default;
-$link-hover-color: #ffffff !default;
+$link-color: #00ff00;
+$link-visited-color: #00cc00;
+$link-hover-color: #ffffff;
 
 $border-color-01: #113311 !default;
 $border-color-02: #113311 !default;
@@ -47,6 +47,8 @@ a,
 a:link,
 a:visited,
 a:active,
+.site-nav .nav-item a,
+.site-nav .nav-item a:visited,
 .site-nav a,
 .site-nav .page-link,
 .nav-item {
