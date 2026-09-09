@@ -101,8 +101,15 @@ async function getReadme(repo) {
 // Call Ollama Cloud API
 async function generateArticle(readme) {
   const prompt =
-    "Based on the following README.md content, write a comprehensive article about this project. " +
-    "Include the purpose, key features, and use cases.\n\nREADME:\n" +
+    "You are a technical writer. Write a comprehensive blog article about the software project described in the README below.\n\n" +
+    "Rules:\n" +
+    "- Start the article directly. Do not include any preamble, disclaimer, or meta-commentary.\n" +
+    "- Do not mention the README, yourself, or what you are about to do.\n" +
+    '- Do not say phrases like "Based on the README", "I have extrapolated", "As described", or similar.\n' +
+    "- If information is limited, write what you can from what is given. Do not acknowledge gaps.\n" +
+    "- Use markdown formatting with headers, bullet points where appropriate.\n" +
+    "- Cover: what the project is, its purpose, key features, and potential use cases.\n\n" +
+    "README:\n" +
     readme;
 
   const res = await makeRequest(
