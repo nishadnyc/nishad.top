@@ -4,7 +4,7 @@ title: Home
 order: 1
 ---
 
-### System Interface Console
+### Terminal
 
 {% include terminal-shell.html %}
 

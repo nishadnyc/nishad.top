@@ -164,7 +164,7 @@ function getPostFilename(repoName, commitDate) {
   return `${y}-${m}-${d}-${repoName.toLowerCase()}.md`;
 }
 
-function getExcerpt(content, length = 50) {
+function getExcerpt(content, length = 100) {
   return (
     content
       .replace(/[#*_`[\]\n\r]/g, " ")
