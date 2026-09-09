@@ -92,14 +92,21 @@ pre {
   overflow-x: auto;
 }
 
-// 2. Styling rules EXCLUSIVELY for tiny inline text keywords (like RapidPro)
-code {
-  background-color: rgba(0, 85, 0, 0.15) !important; // Micro green tint shade
-  border: none !important; // Strips out the box border outline completely
+// 2. Styling rules EXCLUSIVELY for tiny inline text keywords (Force strip borders)
+code,
+p code,
+li code,
+.highlighter-rouge code,
+.highlight code {
+  background-color: rgba(0, 85, 0, 0.15) !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  box-shadow: none !important;
   color: #00ff00 !important;
   padding: 2px 6px !important;
   font-family: "Courier New", Courier, monospace !important;
-  border-radius: 3px;
+  border-radius: 3px !important;
 }
 
 // Dark backdrop on all content areas — header, footer, post body
