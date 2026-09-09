@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About Me
+order: 2
 ---
 
 # About Me
