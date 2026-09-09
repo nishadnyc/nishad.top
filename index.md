@@ -9,7 +9,7 @@ order: 1
 {% include terminal-shell.html %}
 
 <div class="home">
-  <h2 class="post-list-heading">Posts</h2>
+  <h2 class="post-list-heading">Recent Projects</h2>
   
   <ul class="post-list">
     {% for post in site.posts %}
@@ -22,7 +22,7 @@ order: 1
         </h3>
         {% if post.excerpt %}
           <div class="post-excerpt">
-            {{ post.excerpt | strip_html | truncatewords: 30 }}
+            {{ post.excerpt | strip_html | truncatewords: 100 }}
           </div>
         {% endif %}
       </li>
