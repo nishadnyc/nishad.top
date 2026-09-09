@@ -61,30 +61,17 @@
     </div>
   </div>
 
-  <!-- Input Console Prompter Line Row -->
-  <div
-    class="input-line"
-    style="display: flex; align-items: center; margin-top: 15px; color: #00ff00"
-  >
-    <span style="font-weight: bold; margin-right: 10px; white-space: nowrap"
-      >guest@nishadnyc:~$</span
-    >
-    <input
-      type="text"
-      id="terminalInput"
-      autocomplete="off"
-      spellcheck="false"
-      style="
-        background: transparent;
-        border: none;
-        color: #00ff00;
-        font-family: &quot;Courier New&quot;, monospace;
-        font-size: 14px;
-        width: 100%;
-        outline: none;
-        caret-color: #00ff00;
-      "
-    />
+  <!-- Interactive Active Input Prompt Line -->
+  <div class="input-line" style="display: flex; align-items: center; margin-top: 15px; color: #00ff00;">
+    <span style="font-weight: bold; margin-right: 5px; white-space: nowrap;">guest@nishadnyc:~$</span>
+    
+    <div style="position: relative; width: 100%; display: flex; align-items: center;">
+      <!-- Making the font size 16px and bold natively thickens the browser's blinking green caret cursor -->
+      <input type="text" id="terminalInput" autofocus autocomplete="off" spellcheck="false" 
+        style="background: transparent; border: none; color: #00ff00; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; width: 100%; outline: none; caret-color: #00ff00; padding: 0; margin: 0;">
+    </div>
+  </div>
+
   </div>
 </div>
 
@@ -254,6 +241,8 @@
           shellBox.scrollTop = shellBox.scrollHeight;
         }
       }
+
+
     });
   });
 </script>
