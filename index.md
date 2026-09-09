@@ -4,6 +4,10 @@ title: Home
 order: 1
 ---
 
+### System Interface Console
+
+{% include terminal-shell.html %}
+
 <div class="home">
   <h2 class="post-list-heading">Posts</h2>
   
@@ -26,7 +30,3 @@ order: 1
   </ul>
 
 </div>
-
-### System Interface Console
-
-{% include terminal-shell.html %}
