@@ -90,3 +90,34 @@ pre.highlight {
 .code-lang-badge {
   left: 60px !important;
 }
+
+// Readable content backdrop over matrix rain
+.page-content .wrapper,
+.post-content,
+.home {
+  background-color: rgba(5, 5, 5, 0.75) !important;
+  backdrop-filter: blur(1px);
+  padding: 20px;
+  border-radius: 4px;
+}
+
+// Stronger text glow so body text punches through the rain
+body,
+p,
+li,
+td,
+.post-excerpt {
+  color: #00ff00 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
+}
+
+// Stronger glow for headings
+.site-title,
+.post-link,
+h1,
+h2,
+h3 {
+  text-shadow:
+    0 0 10px rgba(0, 255, 0, 1),
+    0 0 20px rgba(0, 255, 0, 0.5) !important;
+}

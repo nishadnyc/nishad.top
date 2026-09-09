@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+env:
+  GIT_USER_NAME: Nishad
+  GIT_USER_EMAIL: 186933450+nishadnyc@users.noreply.github.com
+
 jobs:
   analyze-repos:
     runs-on: ubuntu-latest
@@ -26,13 +30,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
-          GITHUB_USERNAME: NishadNYC
         run: node scripts/generate-posts.js
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "186933450+nishadnyc@users.noreply.github.com"
-          git config --local user.name "Nishad"
+          git config --local user.email "${{ env.GIT_USER_EMAIL }}"
+          git config --local user.name "${{ env.GIT_USER_NAME }}"
           git add _posts/
           if git diff --cached --quiet; then
             echo "No changes to commit"

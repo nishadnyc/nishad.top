@@ -2,10 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 
-const username = process.env.GITHUB_USERNAME;
+let username;
 const githubToken = process.env.GITHUB_TOKEN;
 const ollamaKey = process.env.OLLAMA_API_KEY;
 const postsDir = "_posts";
+if (!fs.existsSync(postsDir)) fs.mkdirSync(postsDir);
 
 // Utility: Make HTTPS request
 function makeRequest(url, method = "GET", headers = {}, body = null) {
@@ -36,6 +37,15 @@ function makeRequest(url, method = "GET", headers = {}, body = null) {
     if (body) req.write(JSON.stringify(body));
     req.end();
   });
+}
+
+// Fetch authenticated GitHub username
+async function getAuthenticatedUser() {
+  const res = await makeRequest("https://api.github.com/user", "GET", {
+    Authorization: `token ${githubToken}`,
+    Accept: "application/vnd.github.v3+json",
+  });
+  return JSON.parse(res.data).login;
 }
 
 // Fetch user's public, non-archived repos
@@ -193,6 +203,8 @@ function createPost(repoName, commitDate, article) {
 // Main
 (async () => {
   try {
+    username = await getAuthenticatedUser();
+    console.log(`Running as: ${username}`);
     const repos = await getPublicRepos();
     console.log(`Found ${repos.length} public repositories\n`);
 
