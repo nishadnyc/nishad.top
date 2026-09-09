@@ -138,19 +138,38 @@ pre.highlight {
   left: 60px !important;
 }
 
-// Clear the mobile responsive dropdown container backgrounds
-.site-nav,
-.site-nav .trigger,
-.site-nav input ~ .trigger {
-  background-color: transparent !important;
-  background: transparent !important;
-}
-
-// Ensure header layout spacing wraps cleanly across compact screens
+// Deep mobile responsive override block — targets Minima's compact viewport breakpoints
 @media screen and (max-width: 600px) {
-  .site-header .wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  // 1. Force the mobile dropdown layout container to be completely transparent
+  .site-header {
+    .site-nav {
+      background-color: transparent !important;
+      border: none !important;
+
+      // Force the layout links wrap block to be transparent instead of white
+      .trigger {
+        background-color: transparent !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        display: flex !important; // Keeps links side-by-side or cleanly stacked
+        gap: 15px;
+        padding: 5px 0;
+      }
+
+      // Hide Minima's default mobile menu button icon since you display direct links
+      .menu-icon {
+        display: none !important;
+      }
+    }
+
+    // 2. Adjust structural symmetry so your title and nav don't collide
+    .wrapper {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 12px !important;
+      padding-top: 15px !important;
+      padding-bottom: 15px !important;
+    }
   }
 }
