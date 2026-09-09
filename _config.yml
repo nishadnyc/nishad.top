@@ -10,3 +10,8 @@ plugins:
 remote_theme: jekyll/minima@v2.5.1
 future: true
 github_username: NishadNYC
+
+social_links:
+  - title: Nishad's GitHub
+    icon: github
+    url: "https://github.com/NishadNYC"
