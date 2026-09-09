@@ -26,3 +26,7 @@ order: 1
   </ul>
 
 </div>
+
+### System Interface Console
+
+{% include terminal-shell.html %}

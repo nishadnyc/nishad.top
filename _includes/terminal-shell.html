@@ -1,0 +1,134 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("terminalInput");
+    const log = document.getElementById("terminalLog");
+
+    const availablePosts = [];
+    document.querySelectorAll("#jekyll-data-posts div").forEach(function (el) {
+      availablePosts.push({
+        title: el.getAttribute("data-title"),
+        url: el.getAttribute("data-url"),
+      });
+    });
+
+    const availablePages = [];
+    document.querySelectorAll("#jekyll-data-pages div").forEach(function (el) {
+      availablePages.push({
+        title: el.getAttribute("data-title"),
+        url: el.getAttribute("data-url"),
+      });
+    });
+
+    document
+      .querySelector(".terminal-shell")
+      .addEventListener("click", function () {
+        input.focus();
+      });
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        const rawCommand = input.value.trim();
+        const command = rawCommand.toLowerCase();
+        input.value = "";
+
+        if (!command) return;
+
+        const userEcho = document.createElement("div");
+        userEcho.style.margin = "10px 0 2px 0";
+        userEcho.style.color = "#00aa00";
+        userEcho.innerHTML =
+          '<span style="font-weight:bold;">guest@nishadnyc:~$</span> ' +
+          rawCommand;
+        log.appendChild(userEcho);
+
+        const output = document.createElement("div");
+        output.style.color = "#00ff00";
+        output.style.paddingLeft = "15px";
+
+        switch (command) {
+          case "help":
+            output.innerHTML =
+              '<div style="color: #00cc00; font-weight: bold; margin-bottom: 5px;">AVAILABLE SYSTEM DIRECTIVES:</div>' +
+              '<div>• <span style="color:#fff;">help</span>    - Displays this operational directory blueprint matrix.</div>' +
+              '<div>• <span style="color:#fff;">posts</span>   - Fetches and lists all active compiled blog files.</div>' +
+              '<div>• <span style="color:#fff;">pages</span>   - Prints out root landing pages and links.</div>' +
+              '<div>• <span style="color:#fff;">contact</span> - Exposes the administration target secure mail endpoint.</div>' +
+              '<div>• <span style="color:#fff;">sudo</span>    - Requests root administrative system privilege bypass.</div>' +
+              '<div>• <span style="color:#fff;">clear</span>   - Purges terminal history stack frames.</div>';
+            break;
+
+          case "clear":
+            log.innerHTML = "";
+            return;
+
+          case "contact":
+            output.innerHTML =
+              'Direct routing connection established: <a href="mailto:186933450+nishadnyc@://github.com" style="color: #ffffff; text-decoration: underline;">186933450+nishadnyc@://github.com</a>';
+            break;
+
+          case "posts":
+            if (availablePosts.length === 0) {
+              output.innerText =
+                "Error code: 404. No posted directories indexed inside standard file nodes.";
+            } else {
+              output.innerHTML =
+                '<div style="color: #00cc00; margin-bottom:5px;">INDEXED SYSTEM POSTS:</div>';
+              availablePosts.forEach(function (p) {
+                output.innerHTML +=
+                  '<div>→ <a href="' +
+                  p.url +
+                  '" style="color:#ffffff; text-decoration:none;">' +
+                  p.title +
+                  "</a></div>";
+              });
+            }
+            break;
+
+          case "pages":
+            output.innerHTML =
+              '<div style="color: #00cc00; margin-bottom:5px;">INDEXED ENVIRONMENT NODES:</div>';
+            availablePages.forEach(function (p) {
+              output.innerHTML +=
+                '<div>📂 <a href="' +
+                p.url +
+                '" style="color:#ffffff; text-decoration:none;">' +
+                p.title +
+                "</a></div>";
+            });
+            break;
+
+          // --- NEW CUSTOM SUDO COMMAND ---
+          case "sudo":
+            output.innerHTML = `
+                <div style="color: #ff3333; font-weight: bold; animation: pulse 0.5s infinite alternate;">[!] WARNING: UNAUTHORIZED ROOT ACCESS ATTEMPT DETECTED</div>
+                <div style="color: #ffffff; margin-top: 5px;">
+                  Bypassing security protocols...<br>
+                  Cracking local keychains...<br>
+                  <span style="color: #00ff00; font-weight: bold;">[SUCCESS] root@nishadnyc:~# ACCESS GRANTED. Welcome, admin.</span>
+                </div>
+              `;
+
+            // Optional: Permanently change the prompt style until they clear or refresh!
+            setTimeout(() => {
+              const promptSpan = document.querySelector(".input-line span");
+              if (promptSpan) {
+                promptSpan.innerText = "root@nishadnyc:#";
+                promptSpan.style.color = "#ff3333";
+              }
+            }, 600);
+            break;
+
+          default:
+            output.innerHTML =
+              '<span style="color: #ff3333;">Command syntax exception: "' +
+              rawCommand +
+              "\" not verified by host system kernels. Type 'help' for diagnostics.</span>";
+            break;
+        }
+
+        log.appendChild(output);
+        input.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+</script>
