@@ -189,6 +189,10 @@ pre.highlight {
       padding-bottom: 15px !important;
     }
   }
+
+  .site-title {
+    font-size: 1.8rem !important; // Slightly smaller for mobile
+  }
 }
 
 // Responsive mobile adjustment for the custom navigation header layout
@@ -207,9 +211,5 @@ pre.highlight {
   .custom-terminal-nav .trigger {
     justify-content: center !important;
     width: 100% !important;
-  }
-
-  .site-title {
-    font-size: 1.8rem !important; // Slightly smaller for mobile
   }
 }
