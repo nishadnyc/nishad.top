@@ -1,0 +1,90 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document
+      .querySelectorAll("pre.highlight, .highlighter-rouge pre")
+      .forEach(function (codeBlock) {
+        // 1. Structure the parent container for absolute alignment
+        const container = codeBlock.parentNode;
+        container.style.position = "relative";
+        container.style.paddingTop = "30px"; // Make clean room for our new top control bar
+
+        // 2. Extract the programming language from Jekyll's auto-generated CSS classes
+        let languageName = "CODE";
+        const parentClasses = container.className.split(" ");
+        const codeClasses = codeBlock.querySelector("code")
+          ? codeBlock.querySelector("code").className.split(" ")
+          : [];
+        const allRepresents = parentClasses.concat(codeClasses);
+
+        for (let c of allRepresents) {
+          if (c.startsWith("language-")) {
+            languageName = c.replace("language-", "").toUpperCase();
+            break;
+          }
+        }
+
+        // 3. Generate the Language Badge element
+        const badge = document.createElement("span");
+        badge.className = "code-lang-badge";
+        badge.innerText = languageName;
+        badge.style.position = "absolute";
+        badge.style.top = "5px";
+        badge.style.left = "10px";
+        badge.style.color = "#008800"; // Darker green matrix shade for metadata
+        badge.style.fontFamily = "'Courier New', monospace";
+        badge.style.fontSize = "11px";
+        badge.style.fontWeight = "bold";
+        badge.style.letterSpacing = "1px";
+        badge.style.zIndex = "10";
+
+        // 4. Generate the Copy Button element
+        const button = document.createElement("button");
+        button.className = "copy-code-btn";
+        button.type = "button";
+        button.innerText = "Copy";
+        button.style.position = "absolute";
+        button.style.top = "5px";
+        button.style.right = "10px";
+        button.style.backgroundColor = "transparent";
+        button.style.border = "1px solid #005500";
+        button.style.color = "#00ff00";
+        button.style.fontFamily = "'Courier New', monospace";
+        button.style.cursor = "pointer";
+        button.style.padding = "2px 8px";
+        button.style.fontSize = "11px";
+        button.style.zIndex = "10";
+        button.style.transition = "all 0.2s ease";
+
+        // Hover design mechanics for the copy toggle button
+        button.addEventListener("mouseenter", function () {
+          button.style.borderColor = "#00ff00";
+          button.style.boxShadow = "0 0 5px rgba(0,255,0,0.3)";
+        });
+        button.addEventListener("mouseleave", function () {
+          button.style.borderColor = "#005500";
+          button.style.boxShadow = "none";
+        });
+
+        // Handle clipboard logging action
+        button.addEventListener("click", function () {
+          const codeText = codeBlock.querySelector("code")
+            ? codeBlock.querySelector("code").innerText
+            : codeBlock.innerText;
+          navigator.clipboard.writeText(codeText).then(function () {
+            button.innerText = "Copied!";
+            button.style.backgroundColor = "#00ff00";
+            button.style.color = "#050505";
+            setTimeout(function () {
+              button.innerText = "Copy";
+              button.style.backgroundColor = "transparent";
+              button.style.color = "#00ff00";
+            }, 2000);
+          });
+        });
+
+        // 5. Append both elements cleanly into the wrapper container
+        container.appendChild(badge);
+        container.appendChild(button);
+      });
+  });
+</script>

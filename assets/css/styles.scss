@@ -1,0 +1,52 @@
+---
+---
+
+// 1. Define custom Terminal Green and Pitch Black variables
+$brand-color: #00ff00 !default;
+$text-color: #00ff00 !default;
+$background-color: #050505 !default;
+$code-background-color: #111111 !default;
+
+$link-color: #00ff00 !default;
+$link-visited-color: #00cc00 !default;
+$link-hover-color: #ffffff !default;
+
+$border-color-01: #113311 !default;
+$border-color-02: #113311 !default;
+$border-color-03: #00ff00 !default;
+
+// 2. Import the rest of Minima's default structural layout styles
+@import "minima";
+
+// 3. Custom global overrides for the ultimate hacker aesthetic
+html,
+body {
+  background-color: $background-color !important;
+  color: $text-color !important;
+  font-family: "Courier New", Courier, monospace !important;
+  scroll-behavior: smooth;
+}
+
+// Custom glow effect for titles and clickable headings
+.site-title,
+.post-link,
+h1,
+h2,
+h3 {
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+  font-family: "Courier New", Courier, monospace !important;
+}
+
+// Fade out secondary post dates slightly using terminal shades
+.post-meta {
+  color: #008800 !important;
+}
+
+// Structure code blocks to look like local scripts
+code,
+pre {
+  background-color: $code-background-color !important;
+  border: 1px solid #005500 !important;
+  color: #00ff00 !important;
+}

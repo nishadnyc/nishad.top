@@ -1,0 +1,53 @@
+<canvas
+  id="matrixCanvas"
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.15;
+  "
+></canvas>
+
+<script>
+  const canvas = document.getElementById("matrixCanvas");
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  const katakana =
+    "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const alphabet = katakana.split("");
+
+  const fontSize = 16;
+  let columns = Math.floor(canvas.width / fontSize);
+  let rainDrops = Array(columns).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(5, 5, 5, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00ff00";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < rainDrops.length; i++) {
+      const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+      ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+      if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        rainDrops[i] = 0;
+      }
+      rainDrops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 30);
+</script>

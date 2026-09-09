@@ -1,7 +1,15 @@
 title: Personal Blog
+description: "A blog about my personal thoughts, experiences, and projects."
+url: "https://nishadnyc.github.io"
 theme: minima
 plugins:
   - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
 remote_theme: jekyll/minima@v2.5.1
 future: true
 github_username: NishadNYC
+
+
+title: "Your Name or Brand Title"
