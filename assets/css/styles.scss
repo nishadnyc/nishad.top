@@ -193,3 +193,26 @@ pre.highlight,
 .highlighter-rouge pre {
   border: 1px solid #005500 !important;
 }
+
+// Deep clean specifically for Jekyll's Rouge highlighter tables
+.highlight table,
+.highlight tr,
+.highlight td,
+.highlight th,
+.rouge-table,
+.rouge-code,
+.gutter,
+.gl {
+  border: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+// Ensure the code table doesn't inherit default markdown cell lines
+.post-content table tr,
+.post-content table td {
+  border-bottom: none !important;
+  border-top: none !important;
+}
