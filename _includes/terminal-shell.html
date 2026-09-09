@@ -96,6 +96,9 @@
 
     if (!input || !log || !shell) return;
 
+    // --- AUTOMATIC FOCUS ON PAGE LOAD ---
+    input.focus();
+
     // Process lists from safe HTML elements to prevent text breaks
     const availablePosts = [];
     document.querySelectorAll("#jekyll-data-posts div").forEach(function (el) {
@@ -245,7 +248,11 @@
         }
 
         log.appendChild(output);
-        input.scrollIntoView({ behavior: "smooth" });
+
+        const shellBox = document.querySelector(".terminal-shell");
+        if (shellBox) {
+          shellBox.scrollTop = shellBox.scrollHeight;
+        }
       }
     });
   });
