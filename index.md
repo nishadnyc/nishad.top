@@ -4,8 +4,6 @@ title: Home
 order: 1
 ---
 
-{% include nav.html %}
-
 <div class="home">
   <h2 class="post-list-heading">Posts</h2>
   
