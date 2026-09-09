@@ -33,10 +33,10 @@ jobs:
         run: |
           git config --local user.email "186933450+nishadnyc@users.noreply.github.com"
           git config --local user.name "Nishad"
-          if git diff-index --quiet HEAD --; then
+          git add _posts/
+          if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git add _posts/
             git commit -m "chore: update repo analysis posts"
             git push
           fi
