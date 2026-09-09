@@ -14,7 +14,7 @@
     display: block !important;
   "
 >
-  <!-- Embedded Jekyll data loops -->
+  <!-- Safe Hidden DOM Dataset Map to isolate Liquid fields from JS engines -->
   <div id="jekyll-data-posts" style="display: none">
     {% for post in site.posts %}
     <div
@@ -34,7 +34,7 @@
     {% endif %} {% endfor %}
   </div>
 
-  <!-- Top Header Bar -->
+  <!-- Console Control Panel Top Ribbon Bar -->
   <div
     class="terminal-header"
     style="
@@ -45,22 +45,23 @@
       font-size: 12px;
       display: flex;
       justify-content: space-between;
+      user-select: none;
     "
   >
-    <span>SESSION: GUEST@NISHADNYC_OS v1.0.0</span>
+    <span>SESSION: GUEST@NISHADNYC_OS v1.0.2</span>
     <span>STATUS: ONLINE</span>
   </div>
 
-  <!-- Content Log -->
+  <!-- Terminal Stream Execution Output Log Window -->
   <div id="terminalLog">
     <div style="color: #00ff00">
       Welcome to the interactive console. Type
       <span style="color: #ffffff; font-weight: bold">help</span> for a list of
-      available core commands.
+      available system commands.
     </div>
   </div>
 
-  <!-- Prompt Input Line -->
+  <!-- Input Console Prompter Line Row -->
   <div
     class="input-line"
     style="display: flex; align-items: center; margin-top: 15px; color: #00ff00"
@@ -95,6 +96,7 @@
 
     if (!input || !log || !shell) return;
 
+    // Process lists from safe HTML elements to prevent text breaks
     const availablePosts = [];
     document.querySelectorAll("#jekyll-data-posts div").forEach(function (el) {
       availablePosts.push({
@@ -162,14 +164,14 @@
                 "Error code: 404. No posted directories indexed inside standard file nodes.";
             } else {
               output.innerHTML =
-                '<div style="color: #00cc00; margin-bottom:5px;">INDEXED SYSTEM POSTS:</div>';
+                '<div style="color: #00cc00; margin-bottom:5px;">INDEXED SYSTEM POSTS (AUTOMATED INGESTION):</div>';
               availablePosts.forEach(function (p) {
                 output.innerHTML +=
                   '<div>→ <a href="' +
                   p.url +
-                  '" style="color:#ffffff; text-decoration:none;">' +
+                  '" style="color:#ffffff; text-decoration:none;">[' +
                   p.title +
-                  "</a></div>";
+                  "]</a></div>";
               });
             }
             break;
@@ -189,11 +191,11 @@
 
           case "sudo":
             output.innerHTML = `
-            <div style="color: #ff3333; font-weight: bold;">[!] WARNING: UNAUTHORIZED ROOT ACCESS ATTEMPT DETECTED</div>
+            <div style="color: #ff3333; font-weight: bold;">[!] WARNING: RESTRICTED SYSTEM privilege EXPLOIT INITIATED</div>
             <div style="color: #ffffff; margin-top: 5px;">
-              Bypassing security protocols...<br>
-              Cracking local keychains...<br>
-              <span style="color: #00ff00; font-weight: bold;">[SUCCESS] root@nishadnyc:~# ACCESS GRANTED. Welcome, admin.</span>
+              Overriding security protocols...<br>
+              Cracking workspace keychains...<br>
+              <span style="color: #00ff00; font-weight: bold;">[SUCCESS] root@nishadnyc:~# SHELL ELEVATED. Welcome, system owner.</span>
             </div>
           `;
 
