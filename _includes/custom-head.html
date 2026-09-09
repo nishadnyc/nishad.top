@@ -2,3 +2,60 @@
   http-equiv="Content-Security-Policy"
   content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
 />
+
+<style>
+  /* Force everything green — injected last so nothing overrides it */
+  *,
+  *::before,
+  *::after {
+    color: #00ff00 !important;
+    font-family: "Courier New", Courier, monospace !important;
+  }
+
+  a,
+  a:link,
+  a:visited,
+  a:active {
+    color: #00ff00 !important;
+    text-decoration: none !important;
+  }
+
+  a:hover {
+    color: #ffffff !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .site-title,
+  .post-link {
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.9) !important;
+  }
+
+  .post-meta {
+    color: #008800 !important;
+  }
+
+  .site-header,
+  .site-footer {
+    background-color: rgba(5, 5, 5, 0.88) !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-content,
+  .post-content {
+    background-color: rgba(5, 5, 5, 0.82) !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  .wrapper,
+  .home,
+  .post-list {
+    background-color: transparent !important;
+  }
+</style>
