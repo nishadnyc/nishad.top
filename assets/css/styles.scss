@@ -22,28 +22,65 @@ $border-color-03: #00ff00 !default;
 html,
 body {
   background-color: $background-color !important;
-  color: $text-color !important;
+  color: #00ff00 !important;
   font-family: "Courier New", Courier, monospace !important;
   scroll-behavior: smooth;
 }
 
-// Custom glow effect for titles and clickable headings
+// Force ALL text elements green — override Minima's post/page color resets
+p,
+li,
+td,
+th,
+span,
+div,
+blockquote,
+strong,
+em,
+small,
+label {
+  color: #00ff00 !important;
+}
+
+// Force ALL links green — covers nav, post links, inline links everywhere
+a,
+a:link,
+a:visited,
+a:active,
+.site-nav a,
+.site-nav .page-link,
+.nav-item {
+  color: #00ff00 !important;
+  text-decoration: none !important;
+}
+
+a:hover,
+.site-nav a:hover,
+.site-nav .page-link:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+// Headings — force green with glow
 .site-title,
 .post-link,
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
   color: #00ff00 !important;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+  text-shadow: 0 0 8px rgba(0, 255, 0, 0.9) !important;
   font-family: "Courier New", Courier, monospace !important;
 }
 
-// Fade out secondary post dates slightly using terminal shades
+// Post meta dates
 .post-meta {
   color: #008800 !important;
 }
 
-// Structure code blocks to look like local scripts
+// Code blocks
 code,
 pre {
   background-color: $code-background-color !important;
@@ -51,10 +88,22 @@ pre {
   color: #00ff00 !important;
 }
 
-// Force layout wrapper blocks to be transparent so the background rain can bleed through
+// Dark backdrop on all content areas — header, footer, post body
 .site-header,
-.site-footer,
+.site-footer {
+  background-color: rgba(5, 5, 5, 0.88) !important;
+  position: relative;
+  z-index: 1;
+}
+
 .page-content,
+.post-content {
+  background-color: rgba(5, 5, 5, 0.82) !important;
+  position: relative;
+  z-index: 1;
+}
+
+// Keep inner wrappers transparent so parent backdrop shows
 .wrapper,
 .home,
 .post-list {
@@ -68,7 +117,6 @@ pre.highlight {
   position: relative;
 }
 
-// Generate the window dots wrapper container
 .highlighter-rouge::before {
   content: "";
   position: absolute;
@@ -77,8 +125,6 @@ pre.highlight {
   width: 40px;
   height: 12px;
   z-index: 15;
-
-  // Use a linear-gradient map to paint three distinct colored terminal window nodes
   background:
     radial-gradient(circle, #ff5f56 4px, transparent 5px) no-repeat 0px 0px,
     radial-gradient(circle, #ffbd2e 4px, transparent 5px) no-repeat 14px 0px,
@@ -86,38 +132,6 @@ pre.highlight {
   background-size: 10px 10px;
 }
 
-// Adjust our language badge slightly to the right so it doesn't overlap the circles
 .code-lang-badge {
   left: 60px !important;
-}
-
-// Readable content backdrop over matrix rain
-.page-content .wrapper,
-.post-content,
-.home {
-  background-color: rgba(5, 5, 5, 0.75) !important;
-  backdrop-filter: blur(1px);
-  padding: 20px;
-  border-radius: 4px;
-}
-
-// Stronger text glow so body text punches through the rain
-body,
-p,
-li,
-td,
-.post-excerpt {
-  color: #00ff00 !important;
-  text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
-}
-
-// Stronger glow for headings
-.site-title,
-.post-link,
-h1,
-h2,
-h3 {
-  text-shadow:
-    0 0 10px rgba(0, 255, 0, 1),
-    0 0 20px rgba(0, 255, 0, 0.5) !important;
 }
