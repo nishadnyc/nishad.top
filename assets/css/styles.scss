@@ -188,3 +188,30 @@ pre.highlight {
     }
   }
 }
+
+// Clear individual word token borders inside inline code blocks completely
+code span,
+p code span,
+li code span,
+.highlighter-rouge code span,
+.highlight code span,
+code[class*="language-"] span {
+  border: none !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  box-shadow: none !important;
+  display: inline !important;
+}
+
+// Strip outer container boxes from the inline wrapper layer
+p code,
+li code,
+span code,
+.highlighter-rouge:not(pre) code,
+.highlight:not(pre) code {
+  border: none !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  box-shadow: none !important;
+  background-color: rgba(0, 85, 0, 0.12) !important;
+}
