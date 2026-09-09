@@ -3,6 +3,9 @@
     const input = document.getElementById("terminalInput");
     const log = document.getElementById("terminalLog");
 
+    // SAFETY GUARD: Stops the code from throwing errors on non-terminal layout nodes
+    if (!input || !log) return;
+
     const availablePosts = [];
     document.querySelectorAll("#jekyll-data-posts div").forEach(function (el) {
       availablePosts.push({
@@ -97,18 +100,16 @@
             });
             break;
 
-          // --- NEW CUSTOM SUDO COMMAND ---
           case "sudo":
             output.innerHTML = `
-                <div style="color: #ff3333; font-weight: bold; animation: pulse 0.5s infinite alternate;">[!] WARNING: UNAUTHORIZED ROOT ACCESS ATTEMPT DETECTED</div>
-                <div style="color: #ffffff; margin-top: 5px;">
-                  Bypassing security protocols...<br>
-                  Cracking local keychains...<br>
-                  <span style="color: #00ff00; font-weight: bold;">[SUCCESS] root@nishadnyc:~# ACCESS GRANTED. Welcome, admin.</span>
-                </div>
-              `;
+              <div style="color: #ff3333; font-weight: bold; animation: pulse 0.5s infinite alternate;">[!] WARNING: UNAUTHORIZED ROOT ACCESS ATTEMPT DETECTED</div>
+              <div style="color: #ffffff; margin-top: 5px;">
+                Bypassing security protocols...<br>
+                Cracking local keychains...<br>
+                <span style="color: #00ff00; font-weight: bold;">[SUCCESS] root@nishadnyc:~# ACCESS GRANTED. Welcome, admin.</span>
+              </div>
+            `;
 
-            // Optional: Permanently change the prompt style until they clear or refresh!
             setTimeout(() => {
               const promptSpan = document.querySelector(".input-line span");
               if (promptSpan) {
