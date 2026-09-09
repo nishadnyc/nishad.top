@@ -1,6 +1,7 @@
 ---
 layout: default
-title: Blog | NishadNYC@github
+title: Home
+order: 1
 ---
 
 {% include nav.html %}
