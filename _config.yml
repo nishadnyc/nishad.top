@@ -1,6 +1,6 @@
 title: Personal Blog
 description: "A blog about my personal thoughts, experiences, and projects."
-url: "https://nishadnyc.github.io"
+url: "https://nishad.top"
 theme: minima
 plugins:
   - jekyll-remote-theme
