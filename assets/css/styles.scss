@@ -173,3 +173,23 @@ pre.highlight {
     }
   }
 }
+
+// Nuclear cleanup for code block gridlines, line numbers, and table cell borders
+pre,
+code,
+.highlight,
+.highlighter-rouge table,
+.highlighter-rouge tr,
+.highlighter-rouge td {
+  border: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+// Re-apply just the outer green border window constraint we want
+pre.highlight,
+.highlighter-rouge pre {
+  border: 1px solid #005500 !important;
+}
