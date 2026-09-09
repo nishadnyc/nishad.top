@@ -10,6 +10,3 @@ plugins:
 remote_theme: jekyll/minima@v2.5.1
 future: true
 github_username: NishadNYC
-
-
-title: "Your Name or Brand Title"
