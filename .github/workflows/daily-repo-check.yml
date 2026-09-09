@@ -1,0 +1,42 @@
+name: Daily Repo Analysis & Post Generation
+
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  analyze-repos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Generate posts from repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          GITHUB_USERNAME: NishadNYC
+        run: node scripts/generate-posts.js
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "186933450+nishadnyc@users.noreply.github.com"
+          git config --local user.name "Nishad"
+          if git diff-index --quiet HEAD --; then
+            echo "No changes to commit"
+          else
+            git add _posts/
+            git commit -m "chore: update repo analysis posts"
+            git push
+          fi
