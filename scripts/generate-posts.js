@@ -126,7 +126,7 @@ async function generateArticle(readme) {
       Authorization: `Bearer ${ollamaKey}`,
       "Content-Type": "application/json",
     },
-    { model: "gemma4:31b-cloud", prompt, stream: false },
+    { model: "qwen3.5:122b", prompt, stream: false },
   );
 
   const data = JSON.parse(res.data);
