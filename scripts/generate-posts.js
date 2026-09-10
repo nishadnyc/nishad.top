@@ -126,7 +126,7 @@ async function generateArticle(readme) {
       Authorization: `Bearer ${ollamaKey}`,
       "Content-Type": "application/json",
     },
-    { model: "deepseek-v4-pro:cloud", prompt, stream: false },
+    { model: "deepseek-v4-flash:cloud", prompt, stream: false },
   );
 
   const data = JSON.parse(res.data);
