@@ -1,5 +1,6 @@
 title: "Nishad's Portfolio"
 description: "A blog about my personal thoughts, experiences, and projects."
+permalink: pretty
 url: "https://nishad.top"
 image: "https://avatars.githubusercontent.com/u/186933450?v=4"
 theme: minima
