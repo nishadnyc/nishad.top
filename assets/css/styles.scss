@@ -1,5 +1,6 @@
-/*---
----*/
+---
+---
+
 // 1. Define custom Terminal Green and Pitch Black variables
 $brand-color: #00ff00;
 $text-color: #00ff00;
@@ -46,14 +47,18 @@ a,
 a:link,
 a:visited,
 a:active,
-.custom-terminal-nav a,
+.site-nav .nav-item a,
+.site-nav .nav-item a:visited,
+.site-nav a,
+.site-nav .page-link,
 .nav-item {
   color: #00ff00 !important;
   text-decoration: none !important;
 }
 
 a:hover,
-.custom-terminal-nav a:hover {
+.site-nav a:hover,
+.site-nav .page-link:hover {
   color: #ffffff !important;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
@@ -77,13 +82,99 @@ h6 {
   color: #008800 !important;
 }
 
+// 1. Massive multi-line code windows get the green border box
+pre,
+pre.highlight,
+.highlighter-rouge pre {
+  background-color: $code-background-color !important;
+  border: 1px solid #005500 !important;
+  color: #00ff00 !important;
+}
+
+// 2. Tiny inline paragraph text keywords (like RapidPro) have NO borders
+code,
+p code,
+li code,
+td code,
+h1 code,
+h2 code,
+h3 code,
+.post-content code,
+.page-content code {
+  background-color: rgba(0, 60, 0, 0.25) !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  color: #00ff00 !important;
+  padding: 2px 6px !important;
+  font-family: "Courier New", Courier, monospace !important;
+  border-radius: 3px !important;
+  display: inline-block;
+}
+
+// 3. Syntax token colors — all green shades, no rouge default colors
+.highlight span,
+.highlight span * {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.highlight .c,
+.highlight .c1,
+.highlight .cm {
+  color: #006600 !important;
+} // comments
+.highlight .k,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt {
+  color: #00ff00 !important;
+  font-weight: bold !important;
+} // keywords
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .se,
+.highlight .si,
+.highlight .sb {
+  color: #00cc00 !important;
+} // strings
+.highlight .mi,
+.highlight .mf,
+.highlight .m {
+  color: #00ee00 !important;
+} // numbers
+.highlight .n,
+.highlight .na,
+.highlight .nb,
+.highlight .nc,
+.highlight .nf,
+.highlight .nn,
+.highlight .nv,
+.highlight .nx {
+  color: #00bb00 !important;
+} // names
+.highlight .o,
+.highlight .ow,
+.highlight .p {
+  color: #00ff00 !important;
+} // operators
+.highlight .err {
+  color: #ff3333 !important;
+  background: transparent !important;
+}
+
 // Dark backdrop on all content areas — header, footer, post body
 .site-header,
 .site-footer {
   background-color: rgba(5, 5, 5, 0.88) !important;
   position: relative;
   z-index: 1;
-  border-bottom: 1px solid #005500 !important;
 }
 
 .page-content,
@@ -99,43 +190,6 @@ h6 {
 .post-list {
   background-color: transparent !important;
   background: transparent !important;
-}
-
-// ==========================================
-//   CLEAN CODE BLOCK AND KEYWORD TARGETING
-// ==========================================
-
-// 1. Massive multi-line code windows get the green border box
-pre,
-pre.highlight,
-.highlighter-rouge pre {
-  background-color: $code-background-color !important;
-  border: 1px solid #005500 !important;
-  border-radius: 4px !important;
-  color: #00ff00 !important;
-  display: block;
-  padding: 15px;
-  overflow-x: auto;
-}
-
-// 2. Tiny inline paragraph text keywords (Strips out borders and cleans syntax tokens)
-code,
-p code,
-li code,
-.highlighter-rouge:not(pre) code,
-.highlight:not(pre) code,
-.highlighter-rouge code span,
-.highlight code span {
-  background-color: rgba(0, 85, 0, 0.15) !important;
-  border: none !important;
-  border-width: 0 !important;
-  border-style: none !important;
-  box-shadow: none !important;
-  color: #00ff00 !important;
-  padding: 2px 6px !important;
-  font-family: "Courier New", Courier, monospace !important;
-  border-radius: 3px !important;
-  display: inline !important;
 }
 
 // Terminal Window Accent Circles Override
@@ -163,24 +217,32 @@ pre.highlight {
   left: 60px !important;
 }
 
-// Deep mobile responsive override block — targets custom navbar hooks
+// Deep mobile responsive override block — targets Minima's compact viewport breakpoints
 @media screen and (max-width: 600px) {
+  // 1. Force the mobile dropdown layout container to be completely transparent
   .site-header {
-    .custom-terminal-nav {
+    .site-nav {
       background-color: transparent !important;
       border: none !important;
 
+      // Force the layout links wrap block to be transparent instead of white
       .trigger {
         background-color: transparent !important;
         background: transparent !important;
         box-shadow: none !important;
         border: none !important;
-        display: flex !important;
+        display: flex !important; // Keeps links side-by-side or cleanly stacked
         gap: 15px;
         padding: 5px 0;
       }
+
+      // Hide Minima's default mobile menu button icon since you display direct links
+      .menu-icon {
+        display: none !important;
+      }
     }
 
+    // 2. Adjust structural symmetry so your title and nav don't collide
     .wrapper {
       flex-direction: column !important;
       align-items: flex-start !important;
@@ -188,28 +250,5 @@ pre.highlight {
       padding-top: 15px !important;
       padding-bottom: 15px !important;
     }
-  }
-
-  .site-title {
-    font-size: 1.8rem !important; // Slightly smaller for mobile
-  }
-}
-
-// Responsive mobile adjustment for the custom navigation header layout
-@media screen and (max-width: 600px) {
-  // Target the inner wrapper element inside the site header container
-  .site-header .wrapper {
-    flex-direction: column !important; // Vertically stack the title and links
-    align-items: center !important; // Center everything symmetrically
-    text-align: center !important;
-    gap: 12px !important; // Add clean vertical breathing room
-    padding-top: 15px !important; // Push layout away from phone status bar
-    padding-bottom: 10px !important;
-  }
-
-  // Center the navigation links block row underneath the main branding
-  .custom-terminal-nav .trigger {
-    justify-content: center !important;
-    width: 100% !important;
   }
 }
