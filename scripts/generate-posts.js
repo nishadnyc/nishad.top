@@ -116,6 +116,8 @@ async function generateArticle(readme) {
     "- Use markdown formatting with headers, bullet points where appropriate.\n" +
     "- Use any markdown image or url that's available for your article. \n" +
     "- Don't put invent any image url out of blue, use only what's available in the project source code or readme.md" +
+    "- Strip the html tags around images that you wanna display, only use markdown" +
+    "- Write the articles in first person, since you are writing the articles on behalf of someone, use 'I', 'me' when referring" +
     "- Cover: what the project is, its purpose, key features, and potential use cases.\n\n" +
     "README:\n" +
     readme;
