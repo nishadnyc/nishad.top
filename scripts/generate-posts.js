@@ -253,6 +253,9 @@ function createPost(repoName, commitDate, article) {
       }
     }
 
+    // Clean up posts for deleted repos
+    removeOrphanedPosts(repos.map((r) => r.name));
+
     console.log(
       `\nSummary: ${created} created, ${updated} updated, ${skipped} skipped`,
     );
