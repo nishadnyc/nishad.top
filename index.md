@@ -2,7 +2,7 @@
 layout: default
 title: Home
 seo:
-  title: { { site.title } }
+  name: Nishad's Portfolio
 image: "https://avatars.githubusercontent.com/u/186933450?v=4"
 order: 1
 ---
