@@ -1,6 +1,8 @@
 ---
 layout: default
-title: { { site.title } }
+title: Home
+seo:
+  title: { { site.title } }
 order: 1
 ---
 
