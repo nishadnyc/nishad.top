@@ -115,8 +115,8 @@ async function generateArticle(readme) {
     "- If information is limited, write what you can from what is given. Do not acknowledge gaps.\n" +
     "- Use markdown formatting with headers, bullet points where appropriate.\n" +
     "- Use any markdown image or url that's available for your article. \n" +
-    "- Don't put invent any image url out of blue, use only what's available in the project source code or readme.md" +
-    "- Strip the html tags around images that you wanna display, only use markdown" +
+    "- Your generated markdown files will be used in jekyll blogs, so keep jekyll compatability in mind";
+  "- Don't put invent any image url out of blue, use only what's available in the project source code or readme.md" +
     "- Write the articles in first person, since you are writing the articles on behalf of someone, use 'I', 'me' when referring" +
     "- Cover: what the project is, its purpose, key features, and potential use cases.\n\n" +
     "README:\n" +
