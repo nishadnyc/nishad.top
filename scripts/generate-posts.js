@@ -57,7 +57,11 @@ async function getPublicRepos() {
     if (!Array.isArray(data) || data.length === 0) break;
 
     data.forEach((repo) => {
-      if (!repo.archived) {
+      // Ignoring readme profile repo
+      if (
+        !repo.archived &&
+        repo.name.toLowerCase() !== username.toLowerCase()
+      ) {
         repos.push({
           name: repo.name,
           default_branch: repo.default_branch,
@@ -110,6 +114,7 @@ async function generateArticle(readme) {
     '- Do not say phrases like "Based on the README", "I have extrapolated", "As described", or similar.\n' +
     "- If information is limited, write what you can from what is given. Do not acknowledge gaps.\n" +
     "- Use markdown formatting with headers, bullet points where appropriate.\n" +
+    "- Use any markdown image or url that's available for your article.\n" +
     "- Cover: what the project is, its purpose, key features, and potential use cases.\n\n" +
     "README:\n" +
     readme;
