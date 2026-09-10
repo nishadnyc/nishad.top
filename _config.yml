@@ -13,9 +13,6 @@ remote_theme: jekyll/minima@v2.5.1
 future: true
 github_username: NishadNYC
 
-social_links:
-  - title: Nishad's GitHub
-    icon: github
-    url: "https://github.com/NishadNYC"
-
-hide_site_feed_link: false
+# Disable automatic titles from markdown headers
+titles_from_headings:
+  enabled: false
