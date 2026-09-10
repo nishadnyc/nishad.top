@@ -161,7 +161,6 @@
               '<div style="color: #00cc00; font-weight: bold; margin-bottom: 5px;">AVAILABLE SYSTEM DIRECTIVES:</div>' +
               '<div>• <span style="color:#fff;">help</span>    - Displays this operational directory blueprint matrix.</div>' +
               '<div>• <span style="color:#fff;">posts</span>   - Fetches and lists all active compiled blog files.</div>' +
-              '<div>• <span style="color:#fff;">view [name]</span> - Renders and opens a specific project page.</div>' +
               '<div>• <span style="color:#fff;">pages</span>   - Prints out root landing pages and links.</div>' +
               '<div>• <span style="color:#fff;">contact</span> - Exposes the administration target secure mail endpoint.</div>' +
               '<div>• <span style="color:#fff;">sudo</span>    - Requests root administrative system privilege bypass.</div>' +
@@ -192,33 +191,6 @@
                   p.title +
                   "</a></div>";
               });
-            }
-            break;
-          // --- DYNAMIC POST LOOKUP ENGINE ---
-          case command.startsWith("view ") ? command : "___SKIP___":
-            const targetPostName = rawCommand.substring(5).trim().toLowerCase();
-
-            if (!targetPostName) {
-              output.innerHTML =
-                '<span style="color: #ff3333;">Syntax error: Specify a target project node. Usage: view [project_name]</span>';
-            } else {
-              // Attempt to locate a matching project node inside your dataset array
-              const matchedPost = availablePosts.find(
-                (p) => p.title.toLowerCase() === targetPostName,
-              );
-
-              if (matchedPost) {
-                output.innerHTML = `<span style="color: #00ff00;">Routing initialization successful. Transferring connection to [${matchedPost.title}]...</span>`;
-                log.appendChild(output);
-
-                // Delay redirection briefly so the terminal text action feels realistic
-                setTimeout(() => {
-                  window.location.href = matchedPost.url;
-                }, 800);
-                return;
-              } else {
-                output.innerHTML = `<span style="color: #ff3333;">System error: Project index "${targetPostName}" not found in current workspace nodes. Type 'posts' for valid directories.</span>`;
-              }
             }
             break;
 

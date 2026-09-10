@@ -1,12 +1,13 @@
 ---
 layout: default
+title: Home
 seo:
-  name: Nishad's Portfolio
+  title: Nishad's Portfolio
 image: "https://avatars.githubusercontent.com/u/186933450?v=4"
 order: 1
 ---
 
-### Home
+### Interactive Shell
 
 {% include terminal-shell.html %}
 
