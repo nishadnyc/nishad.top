@@ -1,0 +1,21 @@
+name: Test Remote Custom Action
+
+on:
+  workflow_dispatch: # Allows you to trigger this manually with a button click
+
+jobs:
+  test-run:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. You MUST check out this tester repo so the action has a place to write files
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. Call your action remotely using your username and repo name
+      - name: Run my custom action from the other repo
+        uses: nishadnyc/ai-jekyll-posts-generation-action@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          ollama-api-key: ${{ secrets.OLLAMA_API_KEY }}
