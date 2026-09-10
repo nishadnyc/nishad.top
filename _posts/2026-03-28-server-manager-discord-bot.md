@@ -3,131 +3,123 @@ layout: post
 title: "server-manager-discord-bot"
 date: 2026-03-28 09:27:52 +0000
 categories: projects
-excerpt: "ServerManager 🎯 – Automate Your Discord Server in Seconds ! ServerManager Logo (LOGO.svg) ! Discor..."
+excerpt: "<div align='center'> ! ServerManager Logo (LOGO.svg) ServerManager 🎯 A Discord bot that handles you..."
 ---
 
-# ServerManager 🎯 – Automate Your Discord Server in Seconds  
-
-![ServerManager Logo](LOGO.svg)  
-[![Discord Invite](https://img.shields.io/badge/Discord-Invite_ServerManager-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/api/oauth2/authorize?client_id=1486709634982088744&permissions=8&scope=bot)  
-[![GitHub](https://img.shields.io/badge/GitHub-View_Repository-181717?style=flat-square&logo=github)](https://github.com/Evilman34/template-bot)  
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
-
----
-
-## Why ServerManager?  
-
-Managing a Discord community can be a full‑time job: you have to create categories, channels, roles, set permissions, and keep newcomers welcomed. ServerManager removes the manual grind by turning a **single command** into a fully‑fledged server structure—complete with welcome messages, moderation tools, and custom templates. The bot is ideal for:
-
-- **New communities** that need a clean, organized start.  
-- **Gaming clans, study groups, hobby clubs** that want pre‑built channel layouts.  
-- **Server admins** looking for a quick way to apply consistent role permissions.  
-- **Developers** who want to share their own server blueprints as JSON templates.
-
----
-
-## Core Features at a Glance  
-
-| Feature | Description |
-|--------|-------------|
-| `!setup` | Build an entire server from a JSON template (default, custom, or community‑provided). |
-| `.say` | Send an anonymous message—perfect for announcements without revealing the author. |
-| `!welcomechannel` | Turn the current text channel into a welcome hub that greets new members with a rich embed. |
-| `!invite` | Instantly retrieve the bot’s invite link (full permissions). |
-| `!help` | Show a tidy list of every available command. |
-| Dynamic Server Names | Use the `--name` flag with `!setup` to rename the server on the fly. |
-| Custom Templates | Drop a JSON file into `templates/` and let anyone spin up that exact layout. |
-| Moderation Suite | Kick, ban, mute, warn, and automatically kick after three warnings. |
-| Warning System | Persisted warnings that trigger auto‑kick, helping keep the community safe. |
+<div align="center">
+  
+  ![ServerManager Logo](LOGO.svg)
+  
+  # ServerManager 🎯
+  
+  **A Discord bot that handles your server for you.**  
+  
+  <a href="https://discord.com/api/oauth2/authorize?client_id=1486709634982088744&permissions=8&scope=bot">
+    <img src="https://img.shields.io/badge/Discord-Invite_ServerManager-7289DA?style=for-the-badge&logo=discord&logoColor=white" alt="Discord Invite">
+  </a>
+  <a href="https://github.com/Evilman34/template-bot">
+    <img src="https://img.shields.io/badge/GitHub-View_Repository-181717?style=flat-square&logo=github" alt="GitHub Repository">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License">
+  </a>
+</div>
 
 ---
 
-## Getting Started  
+## What Is ServerManager?
 
-### Prerequisites  
+ServerManager is a feature‑rich Discord bot that automates the creation and maintenance of community servers. By supplying a JSON template, the bot can spin up a complete server structure—including categories, channels, and roles—within seconds. It also bundles moderation tools, welcome messages, and an anonymous broadcast command, making it ideal for fast‑track community deployment.
 
-- **Node.js** v16 +  
-- **npm** or **yarn**  
-- A Discord Bot Token (create one in the [Discord Developer Portal](https://discord.com/developers/applications))
+---
 
-### Installation Steps  
+## Core Benefits
 
+| Benefit | How ServerManager Delivers It |
+|---------|------------------------------|
+| **One‑click setup** | `!setup` reads a JSON template and builds the entire server hierarchy automatically. |
+| **Consistent branding** | Dynamic server‑name flag (`--name`) lets you rename the server while preserving the template layout. |
+| **Built‑in moderation** | Kick, ban, mute, and warn commands with an auto‑kick after three warnings. |
+| **Customizable welcome** | `!welcomechannel` toggles a rich embed welcome message in any text channel. |
+| **Anonymous announcements** | `.say` lets admins broadcast messages without revealing the sender. |
+| **Extensible templates** | Create, share, and version‑control your own community blueprints in the `templates/` folder. |
+
+---
+
+## Quick Installation Guide
+
+### Prerequisites
+- Node.js **v16+**
+- npm **or** Yarn
+- Discord bot token (create one in the [Discord Developer Portal](https://discord.com/developers/applications))
+
+### Setup Steps
 ```bash
-# 1️⃣ Clone the repository
+# 1️⃣ Clone the repo
 git clone https://github.com/Evilman34/template-bot.git
 cd template-bot
 
 # 2️⃣ Install dependencies
-npm install      # or `yarn`
+npm install   # or: yarn install
 
-# 3️⃣ Configure environment variables
+# 3️⃣ Add your token
+#    Create a .env file in the project root:
+#    DISCORD_TOKEN=your_bot_token_here
 echo "DISCORD_TOKEN=your_bot_token_here" > .env
 
 # 4️⃣ Enable privileged intents
-#    – Message Content Intent
-#    – Server Members Intent
-#    (set them on the Bot page of the Developer Portal)
+#    - Message Content Intent
+#    - Server Members Intent
+#    (do this in the Bot section of the Developer Portal)
 
 # 5️⃣ Launch the bot
 npm start
 ```
 
-Once the bot is online, use the **Discord Invite** button above to add it to your server. The bot will request **Administrator** permission, which guarantees it can create channels, roles, and manage members without additional tweaks.
+Once the bot is running, invite it to a server using the **Discord Invite** button above. The bot will request *Administrator* access to manage channels, roles, and messages.
 
 ---
 
-## Command Reference  
+## Command Overview
 
-### Public Commands  
-
-| Command | What It Does | Example |
-|---------|--------------|---------|
-| `!ping` | Checks that the bot is responsive. | `!ping` |
-| `!help` | Lists every command with a short description. | `!help` |
-| `!invite` | Returns the bot’s OAuth2 invite link. | `!invite` |
-
-### Admin‑Only Commands  
-
+### Public Commands
 | Command | Description | Example |
-|---------|-------------|---------|
-| `!setup [template] [--name "Name"]` | Generates the full server layout from a template. | `!setup rimel.json --name "My Server"` |
-| `.say <message>` | Sends an anonymous message and deletes the command message. | `.say Welcome to the community!` |
-| `!welcomechannel` | Toggles welcome embeds for the current channel. | `!welcomechannel` |
+|--------|-------------|---------|
+| `!ping` | Verify the bot is online | `!ping` |
+| `!help` | List every available command | `!help` |
+| `!invite` | Get the bot’s invite link | `!invite` |
 
-### Moderation Commands (Admin Only)  
+### Admin & Management Commands
+| Command | Description | Example |
+|--------|-------------|---------|
+| `!setup [template] [--name "Server Name"]` | Build a server from a JSON template | `!setup default.json --name "My Community"` |
+| `.say <message>` | Send an anonymous message and delete the trigger | `.say Welcome to the server!` |
+| `!welcomechannel` | Enable/disable welcome embeds in the current channel | `!welcomechannel` |
 
+### Moderation Suite (Admin Only)
 | Command | Action | Example |
-|---------|--------|---------|
-| `!kick <@user> [reason]` | Removes a user from the server. | `!kick @troublemaker spamming` |
-| `!ban <@user> [reason]` | Bans a user permanently. | `!ban @troll harassment` |
-| `!unban <user-id>` | Lifts a ban using the user’s ID. | `!unban 123456789012345678` |
-| `!warn <@user> [reason]` | Issues a warning (3 warnings = auto‑kick). | `!warn @noob spam` |
-| `!warns <@user>` | Shows how many warnings a user has. | `!warns @noob` |
-| `!mute <@user> [duration]` | Mutes a user (default 10 min). | `!mute @noob 1h` |
-| `!unmute <@user>` | Restores a muted user’s speaking rights. | `!unmute @noob` |
+|--------|--------|---------|
+| `!kick <@user> [reason]` | Remove a member | `!kick @Troublemaker Spamming` |
+| `!ban <@user> [reason]` | Ban a member | `!ban @Hacker Harassment` |
+| `!unban <user-id>` | Re‑allow a previously banned user | `!unban 123456789012345678` |
+| `!mute <@user> [duration]` | Mute a member (default 10 min) | `!mute @Noisy 1h` |
+| `!unmute <@user>` | Remove mute | `!unmute @Noisy` |
+| `!warn <@user> [reason]` | Issue a warning (3 warnings → auto‑kick) | `!warn @Spammer Repeated spam` |
+| `!warns <@user>` | Display a user’s warning count | `!warns @Spammer` |
+| `!ban <@user> [reason]` | Permanently ban a user | `!ban @Evil` |
 
 ---
 
-## Templates: From Built‑In to Fully Custom  
+## Template System – The Heart of ServerManager
 
-### Built‑In Templates  
+### How Templates Work
+A template is a JSON file placed inside `templates/`. It defines:
 
-| Template | Use‑Case | Command |
-|----------|----------|--------|
-| `default.json` | Simple community with General, Support, and Voice channels. | `!setup default.json --name "My Community"` |
-| `template.json` | Dedicated space for users of the original Template Bot. | `!setup template.json --name "Template Bot Community"` |
+- **Categories** – Groupings for channels, each with an optional emoji.
+- **Channels** – Text or voice channels, optional topics, and an initial welcome message.
+- **Roles** – Names, hex colors, and a list of Discord permissions.
 
-### Crafting Your Own Template  
-
-1. **Create a JSON file** inside the `templates/` folder (e.g., `my-gaming.json`).  
-2. **Define categories**, each with an `id`, a display `name` (emoji‑prefixed recommended), and an array of `channels`.  
-3. **Add channels**:  
-   - **Text channels** need `name`, `type: "text"`, optional `topic`, and optional `initialMessage`.  
-   - **Voice channels** need `name` and `type: "voice"`.  
-4. **Specify roles** with `name`, hex `color`, and a list of permission strings (e.g., `"administrator"`).
-
-#### Minimal Example  
-
+#### Minimal Template Example
 ```json
 {
   "categories": [
@@ -138,130 +130,111 @@ Once the bot is online, use the **Discord Invite** button above to add it to you
         {
           "name": "welcome",
           "type": "text",
-          "topic": "Introductions and rules",
-          "initialMessage": "👋 Welcome! Please read the rules and introduce yourself."
+          "topic": "Introduce yourself!",
+          "initialMessage": "👋 Welcome to our community!"
         }
       ]
     }
   ],
   "roles": [
     {
-      "name": "Admin",
-      "color": "#FF0000",
-      "permissions": ["administrator"]
+      "name": "Member",
+      "color": "#808080",
+      "permissions": []
     }
   ]
 }
 ```
 
-#### Full‑Featured Gaming Template (excerpt)  
+### Built‑In Templates
+| Template | Intended Community | Command |
+|----------|-------------------|---------|
+| `default.json` | Basic text/voice community | `!setup default.json --name "My Community"` |
+| `template.json` | Template‑Bot user hub | `!setup template.json --name "Template Bot Community"` |
 
-```json
-{
-  "categories": [
-    {
-      "id": "games",
-      "name": "🎮 Games",
-      "channels": [
-        {
-          "name": "valorant",
-          "type": "text",
-          "topic": "Valorant discussion and LFG",
-          "initialMessage": "🎯 Find teammates and share strategies here!"
-        },
-        {
-          "name": "valorant-voice",
-          "type": "voice"
-        }
-      ]
-    }
-  ],
-  "roles": [
-    {
-      "name": "Moderator",
-      "color": "#0099FF",
-      "permissions": ["moderateMembers", "manageMessages"]
-    }
-  ]
-}
+### Creating Your Own Blueprint
+1. **Add a new JSON file** in `templates/` (e.g., `my-gaming.json`).
+2. Follow the schema shown above—categories → channels → roles.
+3. Test locally:
+
+```bash
+!setup my-gaming.json --name "Gaming Hub"
 ```
 
-### Best Practices  
+4. Commit and push to share with the world.
 
-- **Descriptive, lower‑case channel names** (use hyphens for spaces).  
-- **Emojis in category names** for instant visual identification.  
-- **Initial messages** that explain a channel’s purpose.  
-- **Logical grouping**—keep related channels together.  
-- **Consistent role colors** to differentiate ranks.  
-- **Validate JSON** before deployment (`jsonlint` or VS Code’s built‑in linter).  
-
----
-
-## Real‑World Use Cases  
-
-| Scenario | How ServerManager Helps |
-|----------|------------------------|
-| **Gaming Clan** | Deploy a *games* category with separate voice/text rooms for each title, plus role hierarchy (Owner, Moderator, Member). |
-| **Study Group** | Create a *resources* category with channels for notes, assignments, and voice study rooms. |
-| **Open‑Source Project** | Spin up a *documentation* and *support* section, assign *Maintainer* and *Contributor* roles, and enable welcome embeds for new contributors. |
-| **Event Organizers** | Quickly launch an *event* server with announcement, registration, and live‑chat channels; enable temporary mute/kick for disruptive participants. |
-| **Community Templates Marketplace** | Publish your JSON blueprint, let other server owners import it with `!setup my‑template.json`. |
+#### Tips for Clean Templates
+- Use **lowercase, hyphenated** channel names (`general-chat`).
+- Prefix categories with **emojis** for instant visual sorting.
+- Keep **initial messages** short, welcoming, and context‑rich.
+- Assign **distinct hex colors** to each role for quick visual cues.
+- Limit the number of channels to avoid clutter; group related topics in the same category.
 
 ---
 
-## Permissions & Security  
+## Real‑World Use Cases
 
-The bot functions best with **Administrator** permission, eliminating the need to manually grant each individual permission. If you prefer a principle‑of‑least‑privilege approach, ensure the bot has at least:
-
-- **Manage Channels**  
-- **Manage Roles**  
-- **Send Messages** & **Read Message History**  
-- **Manage Guild** (for server name changes)  
-
-**Privileged Gateway Intents** must be enabled in the Discord Developer Portal:
-
-- **Message Content Intent** – required for `.say` and command parsing.  
-- **Server Members Intent** – required for welcome messages and member‑based moderation.
+| Scenario | How ServerManager Solves It |
+|----------|----------------------------|
+| **Launching a new gaming clan** | Deploy a ready‑made gaming template (`!setup gaming.json`) that includes LFG channels, voice rooms, and role hierarchies. |
+| **Setting up a support hub for a product** | Create a `support.json` template with ticket, FAQ, and announcements channels; enable welcome messages to guide newcomers. |
+| **Running a frequent event series** | Use `.say` to broadcast event details anonymously, then mute or unmute participants as needed with the moderation commands. |
+| **On‑boarding new Discord servers for a brand** | Store brand‑specific templates (logo, colors, channel naming conventions) and spin them up instantly for each new client. |
+| **Community moderation with minimal staff** | Leverage the warning system—after three warnings a user is automatically kicked, reducing manual oversight. |
 
 ---
 
-## Troubleshooting Quick Guide  
+## Deploying & Sharing Templates
 
-| Symptom | Likely Cause | Fix |
-|---------|--------------|-----|
-| Bot ignores commands | Missing intents or insufficient permissions | Verify intents are enabled and the bot has Administrator or required individual permissions. |
-| `!setup` fails | Template file missing or malformed JSON | Check that the file exists in `templates/` and run it through a JSON validator. |
-| Welcome embed never appears | Server Members intent disabled or `!welcomechannel` not run in the target channel | Enable the intent, then re‑run `!welcomechannel` in the desired text channel. |
-| Roles not created | Bot lacks Manage Roles or the role name already exists | Grant Manage Roles permission or rename the conflicting role. |
-| Bot crashes on start | Node version too low or missing `.env` variable | Upgrade to Node ≥ 16 and ensure `DISCORD_TOKEN` is set correctly. |
+```bash
+# After creating templates/my-template.json
+git add templates/my-template.json
+git commit -m "Add custom community template"
+git push origin main
+```
 
----
+Once pushed, other server owners can run:
 
-## Contributing & Extending  
+```bash
+!setup my-template.json --name "Awesome Community"
+```
 
-1. **Fork the repo** and create a new branch for your changes.  
-2. **Add or improve templates** in the `templates/` folder.  
-3. **Submit a Pull Request** – include a short description and any relevant screenshots.  
-4. **Report bugs** via the **Issues** tab on GitHub.  
+You can also list your bot on popular directories to increase visibility:
 
-All contributions are covered under the **MIT License**, meaning you’re free to use, modify, and redistribute the code as long as the original license notice is retained.
+- **[top.gg](https://top.gg/)**
+- **[discord.bots.gg](https://discord.bots.gg/)**
+- **[discordbotlist.com](https://discordbotlist.com/)**
 
----
-
-## Where to Find ServerManager  
-
-- **Top.gg** – the largest Discord bot listing.  
-- **discord.bots.gg** – community‑driven directory.  
-- **discordbotlist.com** – another popular marketplace.  
-
-Listing the bot on these platforms helps people discover ServerManager and grow the community around it.
+These platforms let users discover ServerManager and instantly add it to their servers.
 
 ---
 
-## Final Thoughts  
+## Troubleshooting Quick Reference
 
-ServerManager turns the often‑tedious process of server setup into a **single line of text**. Whether you’re launching a brand‑new gaming clan, a professional study hub, or a public community, the combination of **template‑driven architecture**, **built‑in moderation**, and **welcome automation** gives you a polished Discord experience in minutes.  
+| Problem | Checklist |
+|----------|-----------|
+| Bot doesn’t respond | • Bot has **Administrator** or required permissions.<br>• **Message Content** and **Server Members** intents enabled.<br>• Bot is online (`!ping`). |
+| `!setup` fails | • Template file exists in `templates/`.<br>• JSON is valid (no trailing commas).<br>• Bot can **Manage Channels** and **Manage Roles**. |
+| Welcome messages silent | • `!welcomechannel` executed in desired channel.<br>• Bot has **Send Messages** permission.<br>• **Server Members** intent is active. |
+| Roles not created | • Role name isn’t already taken.<br>• Bot has **Manage Roles** permission.<br>• Role name ≤ 100 characters and color is a valid hex code. |
 
-Give it a spin, create your own templates, and let the bot do the heavy lifting—so you can focus on what really matters: building a thriving community.  
+---
 
-*Made with ❤️ by Evilman34*
+## Contributing & Community
+
+- **Feature ideas** → Open an issue on GitHub.  
+- **New templates** → Fork the repo, add your JSON file to `templates/`, and submit a pull request.  
+- **Bug reports** → Include the command you ran and any error messages.
+
+All contributions are welcomed under the **MIT License**—feel free to remix, extend, or integrate ServerManager into your own projects.
+
+---
+
+## License
+
+This project is licensed under the **MIT License**. See the `LICENSE` file for full terms.
+
+--- 
+
+**ServerManager – Handle Your Server Automatically**  
+Made with ❤️ by **Evilman34**.
