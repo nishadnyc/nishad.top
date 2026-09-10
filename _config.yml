@@ -16,3 +16,7 @@ github_username: NishadNYC
 # Disable automatic titles from markdown headers
 titles_from_headings:
   enabled: false
+
+# Facebook Open Graph Configuration
+facebook:
+  app_id: "1988062861858816"
