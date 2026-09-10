@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Home
-seo:
-  title: Nishad's Portfolio
+opengraph:
+  title: "The Name of Your Blog"
 image: "https://avatars.githubusercontent.com/u/186933450?v=4"
 order: 1
 ---
