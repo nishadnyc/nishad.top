@@ -147,17 +147,18 @@ function shouldUpdatePost(repoName, lastCommitDate) {
   const match = existing.match(/^(\d{4}-\d{2}-\d{2})/);
   if (!match) return true;
 
-  return lastCommitDate > new Date(match[1]);
+  const commitDay = lastCommitDate.toISOString().substring(0, 10);
+  return commitDay > match[1];
 }
 
-// Remove old post file for this repo if the date changed
-function removeOldPost(repoName) {
+// Remove old post file only if it has a different date than the new one
+function removeOldPost(repoName, newFilename) {
   const files = fs.readdirSync(postsDir);
   const escaped = repoName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const pattern = new RegExp(`^\\d{4}-\\d{2}-\\d{2}-${escaped}\\.md$`, "i");
 
   files
-    .filter((f) => pattern.test(f))
+    .filter((f) => pattern.test(f) && f !== newFilename)
     .forEach((f) => {
       fs.unlinkSync(path.join(postsDir, f));
       console.log(`  Removed old post: ${f}`);
@@ -252,9 +253,8 @@ function removeOrphanedPosts(repoNames) {
         console.log("Generating article...");
         const article = await generateArticle(readme);
 
-        removeOldPost(repo.name);
-
         const filename = getPostFilename(repo.name, lastCommitDate);
+        removeOldPost(repo.name, filename);
         const postPath = path.join(postsDir, filename);
         const isNew = !fs.existsSync(postPath);
 
