@@ -199,6 +199,23 @@ function createPost(repoName, commitDate, article) {
   ].join("\n");
 }
 
+// Remove posts for repos that no longer exist
+function removeOrphanedPosts(repoNames) {
+  const files = fs.readdirSync(postsDir);
+  const repoNamesLower = repoNames.map((n) => n.toLowerCase());
+
+  files.forEach((f) => {
+    const match = f.match(/^\d{4}-\d{2}-\d{2}-(.+)\.md$/);
+    if (!match) return;
+
+    const postRepoName = match[1].toLowerCase();
+    if (!repoNamesLower.includes(postRepoName)) {
+      fs.unlinkSync(path.join(postsDir, f));
+      console.log(`  Removed orphaned post: ${f}`);
+    }
+  });
+}
+
 // Main
 (async () => {
   try {
