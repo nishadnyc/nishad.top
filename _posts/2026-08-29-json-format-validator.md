@@ -3,36 +3,51 @@ layout: post
 title: "json-format-validator"
 date: 2026-08-29 01:07:45 +0000
 categories: projects
-excerpt: "json‑format‑validator: Secure, Fail‑Safe JSON Validation & Formatting for Node.js ! npm version (ht..."
+excerpt: "json‑format‑validator – Safe, Simple JSON Sanitization & Pretty‑Printing ! npm version (https://img..."
 ---
 
-# json‑format‑validator: Secure, Fail‑Safe JSON Validation & Formatting for Node.js
+# json‑format‑validator – Safe, Simple JSON Sanitization & Pretty‑Printing
 
 ![npm version](https://img.shields.io/npm/v/json-format-validator.svg) ![license](https://img.shields.io/npm/l/json-format-validator.svg)
 
-## Why a Dedicated JSON Validator?
-
-JSON is the lingua franca of modern web APIs, but parsing raw strings in a Node.js server still carries hidden risks:
-
-| Threat | What Happens | How **json‑format‑validator** Helps |
-|--------|--------------|------------------------------------|
-| **Prototype Pollution** | Malicious payloads inject `__proto__` or `constructor` keys, corrupting the global object prototype. | The parser strips those keys during parsing, neutralizing the attack. |
-| **Denial‑of‑Service via Huge Payloads** | Unchecked `JSON.parse` on multi‑megabyte strings blocks the event loop. | A configurable size guard aborts parsing before the memory budget is exceeded. |
-| **Unhandled Exceptions** | Syntax errors cause uncaught exceptions that can crash the process. | The library returns a structured `{ status, data }` object instead of throwing. |
-
-By wrapping these safeguards into a tiny utility, you get peace of mind without sacrificing developer ergonomics.
+When I work on backend services, I constantly receive JSON payloads from clients, webhooks, or third‑party APIs. A single malformed or malicious JSON string can crash a Node.js process, expose prototype‑pollution vulnerabilities, or overload the event loop with a gigantic payload. That’s why I created **json‑format‑validator**, a lightweight utility that validates, sanitizes, and formats JSON strings **without ever throwing an unhandled exception**.
 
 ---
 
-## Core Features at a Glance
+## What the Project Does
 
-- **Safe Parsing** – Automatic removal of `__proto__` and `constructor` keys.
-- **Fail‑Safe API** – Always returns `{ status: boolean, data: string }`; no thrown errors.
-- **Payload Guard** – Enforces a configurable size limit (default 5 MB) to stop memory‑exhaustion attacks.
-- **Flexible Indentation** – Choose 0‑10 spaces or switch to tabs (`'-t'`).
-- **Universal Import** – Works with CommonJS (`require`) **and** ES Modules (`import`).
-- **CLI & Git Hook Support** – Prettify files from the terminal or reject bad JSON before commits.
-- **Express Middleware** – Validate inbound request bodies with a single plug‑in.
+`json-format-validator` takes a raw JSON string, parses it safely, strips dangerous prototype keys, enforces an optional size ceiling, and returns a nicely indented JSON string. Instead of throwing, it always returns a predictable response object:
+
+```js
+{
+  status: true,   // false if parsing/validation failed
+  data:   '{\n  "key": "value"\n}' // prettified JSON on success, raw input on failure
+}
+```
+
+---
+
+## Why I Built It
+
+* **Robustness** – Node’s native `JSON.parse` throws on syntax errors, which can crash your server if not caught. My wrapper catches everything and gives you a clean status flag.  
+* **Security** – Prototype‑pollution attacks target the `__proto__` and `constructor` properties. The library’s custom reviver removes those keys before they ever reach your code.  
+* **Resource Guarding** – Large payloads can exhaust memory. I added a configurable payload limit (default **5 MB**) that aborts parsing early.  
+* **Zero‑Configuration** – Works out‑of‑the‑box with both CommonJS (`require`) and ES Modules (`import`).  
+
+---
+
+## Key Features
+
+| Feature | What It Means for You |
+|---------|-----------------------|
+| **Safe Parsing** | Strips `__proto__`, `proto`, and `constructor` keys during parse. |
+| **Fail‑Safe Response** | Returns `{ status, data }` instead of throwing. |
+| **Payload Guard** | Enforces a maximum size in megabytes (default 5 MB). |
+| **Flexible Indentation** | Choose 0‑10 spaces or tabs (`'-t'`). |
+| **Universal Import** | Works with `require` **and** `import`. |
+| **CLI Support** | Prettify files directly from the terminal (`npx json-format`). |
+| **Express Middleware** | Plug‐and‑play validation for incoming requests. |
+| **Git Hook Integration** | Block invalid JSON from entering your repository. |
 
 ---
 
@@ -42,19 +57,18 @@ By wrapping these safeguards into a tiny utility, you get peace of mind without 
 npm install json-format-validator
 ```
 
-The package is published on npm and works with any Node.js version supporting ES2020+.
+That’s it – the package ships with a tiny runtime footprint and no peer dependencies.
 
 ---
 
-## Getting Started
+## Quick Start
 
-### 1. Basic Usage – CommonJS
+### 1. CommonJS (require)
 
 ```js
-// commonjs-example.js
 const processAndFormatJson = require('json-format-validator');
-// Or destructure the named export:
-const { processAndFormatJson } = require('json-format-validator');
+// or named import
+// const { processAndFormatJson } = require('json-format-validator');
 
 const rawJson = '{"name":"Alice","role":"admin"}';
 const result = processAndFormatJson(rawJson);
@@ -68,26 +82,22 @@ console.log(result);
 */
 ```
 
-### 2. ES Modules
+### 2. ES Modules (import)
 
 ```js
-// es-modules-example.mjs
 import processAndFormatJson from 'json-format-validator';
-// Or named import:
-import { processAndFormatJson } from 'json-format-validator';
+// or named import
+// import { processAndFormatJson } from 'json-format-validator';
 
 const rawJson = '{"status":"active","count":42}';
 const { status, data } = processAndFormatJson(rawJson);
-console.log(status, data);
 ```
-
-Both styles return the same safe, pretty‑printed payload.
 
 ---
 
-## Custom Indentation & Tab Support
+## Advanced Usage
 
-Control the visual formatting of the output:
+### Custom Indentation & Tab Support
 
 ```js
 const processAndFormatJson = require('json-format-validator');
@@ -98,54 +108,37 @@ const input = '{"debug":true,"level":3}';
 const formatted4 = processAndFormatJson(input, 4);
 console.log(formatted4.data);
 
-// Tab indentation (use the literal string '-t')
+// Tab indentation
 const formattedTabs = processAndFormatJson(input, '-t');
 console.log(formattedTabs.data);
 ```
 
-Valid indentation values are integers `0–10` (spaces) or the string `'-t'` for tabs.
-
----
-
-## Enforcing Payload Size Limits
-
-When dealing with large uploads, set a safety ceiling in megabytes:
+### Configurable Payload Limits
 
 ```js
 // Allow up to 10 MB payloads
 const result = processAndFormatJson(largeJsonString, 2, 10);
-if (!result.status) {
-  console.warn('Payload too large or malformed');
-}
 ```
 
-The third argument (`limitMb`) defaults to **5 MB** if omitted.
-
----
-
-## Graceful Error Handling
-
-If parsing fails, the library never throws. Instead, `status` becomes `false` and `data` contains the original input.
+### Graceful Error Handling
 
 ```js
-const processAndFormatJson = require('json-format-validator');
-
-const badJson = '{"title": "Bug Report", status: open}';
-const result = processAndFormatJson(badJson);
+const invalidJson = '{"title":"Bug Report", status: open}';
+const result = processAndFormatJson(invalidJson);
 
 if (!result.status) {
-  console.error('Invalid JSON');
-  console.error('Raw input retained:', result.data);
+  console.warn('Failed to parse JSON safely.');
+  console.log('Original input was left untouched:', result.data);
 }
 ```
 
-This pattern keeps your server running and lets you surface clear error messages to callers.
-
 ---
 
-## Advanced Integrations
+## Integrations
 
-### Express Middleware
+### Express.js Middleware
+
+Secure incoming webhook bodies before they hit your route logic:
 
 ```js
 const express = require('express');
@@ -153,24 +146,23 @@ const processAndFormatJson = require('json-format-validator');
 
 const app = express();
 
-function validateJsonMiddleware(opts = {}) {
-  const { indent = 2, limitMb = 5 } = opts;
+function validateJsonMiddleware({ indent = 2, limitMb = 5 } = {}) {
   return (req, res, next) => {
     if (typeof req.body !== 'string') return next();
 
-    const { status, data } = processAndFormatJson(req.body, indent, limitMb);
-    if (!status) {
+    const result = processAndFormatJson(req.body, indent, limitMb);
+    if (!result.status) {
       return res.status(400).json({
         error: 'Invalid JSON payload received',
-        raw: data,
+        raw: result.data,
       });
     }
-    req.formattedJson = data;
+
+    req.formattedJson = result.data;
     next();
   };
 }
 
-// Accept raw text bodies (e.g., webhook payloads)
 app.post(
   '/api/webhook',
   express.text({ type: '*/*', limit: '5mb' }),
@@ -179,37 +171,31 @@ app.post(
     res.send(`Received valid JSON:\n${req.formattedJson}`);
   }
 );
-
-app.listen(3000, () => console.log('Server listening on :3000'));
 ```
-
-The middleware sanitizes the body, enforces size limits, and injects the formatted JSON into `req.formattedJson`.
 
 ### Command‑Line Interface (CLI)
 
-You can prettify JSON files directly from the terminal—no code required.
+Prettify files without writing any JavaScript:
 
 ```bash
-# Prettify using the default 2‑space indentation
+# Pretty‑print using 2 spaces
 npx json-format config.json
 
-# Prettify using tabs and redirect output
+# Use tabs and redirect output
 npx json-format data.json -t > pretty-data.json
 ```
 
-The CLI respects the same size guard and sanitization logic as the programmatic API.
-
 ### Git Pre‑Commit Hook
 
-Automatically reject malformed JSON before it lands in your repository.
+Prevent malformed JSON from ever reaching your repository:
 
 ```js
-// .git/hooks/pre-commit (make it executable)
+// check-json.js
 const { execSync } = require('child_process');
 const fs = require('fs');
 const processAndFormatJson = require('json-format-validator');
 
-const staged = execSync('git diff --cached --name-only --diff-filter=ACM "*.json"')
+const stagedFiles = execSync('git diff --cached --name-only --diff-filter=ACM "*.json"')
   .toString()
   .trim()
   .split('\n')
@@ -217,65 +203,62 @@ const staged = execSync('git diff --cached --name-only --diff-filter=ACM "*.json
 
 let hasError = false;
 
-for (const file of staged) {
+stagedFiles.forEach(file => {
   const content = fs.readFileSync(file, 'utf8');
-  const { status } = processAndFormatJson(content);
-  if (!status) {
-    console.error(`[Pre‑Commit] Invalid JSON in ${file}`);
+  const result = processAndFormatJson(content);
+  if (!result.status) {
+    console.error(`[Pre‑Commit Error] Invalid JSON in ${file}`);
     hasError = true;
   }
-}
+});
 
 if (hasError) process.exit(1);
 ```
 
-Integrating this script into `package.json` scripts or Husky hooks enforces clean JSON across the team.
+Add this script to your `package.json` hooks (e.g., via `husky`) and you’ll catch bad JSON before anyone can commit it.
 
 ---
 
 ## API Reference
 
-| Signature | Description |
-|------------|--------------|
-| `processAndFormatJson(jsonString, [indent], [limitMb])` | Parses, sanitizes, and pretty‑prints a JSON string. |
-| **Parameters** | |
-| `jsonString` | **string** – Raw JSON input (required). |
-| `indent` | **number** (0‑10) *or* **string** `'-t'`. Default `2`. Controls spacing or tab usage. |
-| `limitMb` | **number** – Maximum payload size in megabytes. Default `5`. |
-| **Returns** | **Object** `{ status: boolean, data: string }` |
-| `status` | `true` if parsing succeeded; `false` otherwise. |
-| `data` | Formatted JSON on success; raw input on failure. |
+```ts
+processAndFormatJson(
+  jsonString: string,
+  indent?: number | string, // 0‑10 spaces or '-t' for tabs (default 2)
+  limitMb?: number           // max payload in MB (default 5)
+): { status: boolean, data: string }
+```
 
-### Security Safeguards
-
-- **Prototype Pollution Defense** – A custom reviver strips any `__proto__` or `constructor` properties during `JSON.parse`.
-- **Buffer Guard** – Byte length is measured **before** parsing; inputs exceeding `limitMb` are rejected early.
+* `status` – `true` when parsing and formatting succeeded; `false` otherwise.  
+* `data` – Formatted JSON on success, the untouched input on failure.
 
 ---
 
-## When to Use json‑format‑validator
+## Security Safeguards
 
-- **API Gateways** that need to validate and clean inbound JSON payloads without risking a crash.
-- **Microservices** where a single malformed request should not bring down the entire process.
-- **CI/CD Pipelines** that enforce code‑base hygiene by rejecting broken JSON files.
-- **Developer Tooling** for quick, safe JSON pretty‑printing from the command line.
-- **Legacy Systems** where you cannot fully control client inputs but still want robust sanitization.
+### Prototype Pollution Defense
+During `JSON.parse`, a custom reviver removes any key that matches:
+* `__proto__`
+* `proto`
+* `constructor`
+
+This neutralizes attempts to mutate `Object.prototype` and inject malicious behavior.
+
+### Buffer Guard
+Before parsing, the library measures the byte length of the input. If it exceeds the configured limit, parsing is aborted and `{ status: false }` is returned, protecting the single‑threaded Node.js event loop from memory‑exhaustion attacks.
 
 ---
 
-## License
+## Potential Use Cases
 
-`json-format-validator` is released under the **MIT License**, allowing unrestricted use in both open‑source and commercial projects.
+* **API Gateways** – Validate external webhook payloads or client‑submitted JSON before processing.
+* **Microservice Communication** – Ensure internal messages are well‑formed and safe.
+* **CI/CD Pipelines** – Enforce JSON correctness in config files, OpenAPI specs, or translation bundles.
+* **CLI Tooling** – Offer developers a quick way to prettify and sanity‑check JSON files locally.
+* **Legacy Systems** – Wrap existing parsers with a fail‑safe layer without refactoring the whole codebase.
 
 ---
 
 ## Closing Thoughts
 
-Handling JSON safely is no longer a lofty aspiration—it's a practical necessity. By integrating **json‑format‑validator** you gain:
-
-- **Zero‑crash guarantees** (no uncaught `SyntaxError`s),
-- **Built‑in defense** against prototype pollution,
-- **Configurable resource limits**, and
-- **A clean, consistent API** across environments.
-
-Add it to your Node.js toolbox today and let your services focus on business logic, not on defensive parsing.
+I built **json‑format‑validator** because I wanted a single, tiny dependency that could **protect** my services, **simplify** JSON handling, and **avoid** the noisy try/catch boilerplate that normally surrounds `JSON.parse`. Whether you’re writing a server, a command‑line utility, or a Git hook, this library gives you a predictable, secure, and configurable way to work with JSON—**no crashes, no prototype hijacking, just clean data**. Give it a spin and let me know how it improves your workflow!
