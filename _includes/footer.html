@@ -100,12 +100,23 @@
     color: #007700 !important;
   }
 
-  /* ── Inline code ── */
-  code {
-    background-color: #0a1a0a !important;
-    border: 1px solid #005500 !important;
+  /* ── Inline code — no borders ── */
+  code,
+  p code,
+  li code,
+  td code,
+  h1 code,
+  h2 code,
+  h3 code,
+  .post-content code,
+  .page-content code {
+    background-color: rgba(0, 60, 0, 0.25) !important;
+    border: none !important;
+    border-width: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
     color: #00ff00 !important;
-    padding: 1px 5px !important;
+    padding: 2px 6px !important;
     border-radius: 3px !important;
     font-size: 0.9em !important;
   }
