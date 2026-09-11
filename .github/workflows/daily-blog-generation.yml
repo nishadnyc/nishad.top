@@ -1,20 +1,23 @@
-name: Test Remote Custom Action
+name: Daily Generate Blog Content
 
 on:
   workflow_dispatch: # Allows you to trigger this manually with a button click
+  schedule:
+    - cron: "0 22 * * *"
+
+permissions:
+  contents: write
 
 jobs:
   test-run:
     runs-on: ubuntu-latest
     steps:
-      # 1. You MUST check out this tester repo so the action has a place to write files
       - name: Checkout target repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. Call your action remotely using your username and repo name
-      - name: Run my custom action from the other repo
+      - name: Running Ai Action
         uses: nishadnyc/ai-jekyll-posts-generation-action@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
