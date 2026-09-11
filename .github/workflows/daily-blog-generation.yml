@@ -17,8 +17,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Running Ai Action
-        uses: nishadnyc/ai-jekyll-posts-generation-action@main
+      - name: Automated Repo Article Generator
+        uses: nishadnyc/ai-jekyll-posts-generation-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           ollama-api-key: ${{ secrets.OLLAMA_API_KEY }}
