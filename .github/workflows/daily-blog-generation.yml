@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  test-run:
+  analyze-repos:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout target repository
